@@ -51,6 +51,6 @@ Ryan
 Installing
 ==========
 
-`pip install exception-template`
+``pip install exception-template``
 
 No extra dependencies are needed!
