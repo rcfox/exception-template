@@ -1,6 +1,6 @@
 import setuptools
 
-with open('README.md') as f:
+with open('README.rst') as f:
     long_description = f.read()
 
 setuptools.setup(
@@ -8,7 +8,6 @@ setuptools.setup(
     version='0.0.1',
     description='Create exception classes from message templates.',
     long_description=long_description,
-    long_description_content_type='text/markdown',
     url='https://github.com/rcfox/exception-template',
     author='Ryan Fox',
     author_email='ryan@rcfox.ca',
