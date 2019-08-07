@@ -53,7 +53,7 @@ class ExceptionTemplate(Exception):
         """
         if key in self._kwargs:
             return self._kwargs[key]
-        raise AttributeError("'{name}' object has no attribute '{key}'"
+        raise AttributeError('{name!r} object has no attribute {key!r}'
                              .format(name=self.__class__.__name__, key=key))
 
 if __name__ == '__main__':
