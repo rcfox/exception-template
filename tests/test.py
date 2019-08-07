@@ -1,4 +1,7 @@
 import unittest
+import string
+from typing import Any, Mapping, Sequence
+
 from exception_template import ExceptionTemplate
 
 class TestExceptionTemplate(unittest.TestCase):
@@ -96,6 +99,19 @@ class TestExceptionTemplate(unittest.TestCase):
         ex = ChildException(test='a')
         self.assertEqual(str(ex), 'Parent a')
 
+    def test_formatter(self) -> None:
+
+        class AngryFormatter(string.Formatter):
+            def vformat(self, format_string: str, args: Sequence[Any],
+                        kwargs: Mapping[str, Any]) -> str:
+                return super().vformat(format_string, args, kwargs).upper()
+
+        class TestException(ExceptionTemplate):
+            message = 'Sometimes I {feeling} to {verb} things.'
+            formatter = AngryFormatter()
+
+        ex = TestException(feeling='like', verb='yell')
+        self.assertEqual(str(ex), 'SOMETIMES I LIKE TO YELL THINGS.')
 
 
 if __name__ == '__main__':
