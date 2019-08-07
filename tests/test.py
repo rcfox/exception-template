@@ -69,6 +69,34 @@ class TestExceptionTemplate(unittest.TestCase):
         self.assertEqual(str(ex), 'a b4')
         self.assertEqual(str(ex2), 'a b5')
 
+    def test_child_class_override(self) -> None:
+
+        class ParentException(ExceptionTemplate):
+            message = 'Parent {test}'
+
+        class ChildException(ParentException):
+            message = 'Child {other_test}'
+
+        ex = ChildException(other_test='a')
+        self.assertEqual(str(ex), 'Child a')
+        with self.assertRaises(AttributeError):
+            _ = ex.test
+
+        self.assertIsInstance(ex, ChildException)
+        self.assertIsInstance(ex, ParentException)
+
+    def test_child_class_no_override(self) -> None:
+
+        class ParentException(ExceptionTemplate):
+            message = 'Parent {test}'
+
+        class ChildException(ParentException):
+            pass
+
+        ex = ChildException(test='a')
+        self.assertEqual(str(ex), 'Parent a')
+
+
 
 if __name__ == '__main__':
     unittest.main()
