@@ -51,10 +51,15 @@ class ExceptionTemplate(Exception):
         """
         Any exception kwargs arguments are accessible by name on the object.
         """
-        if key in self._kwargs:
+        remind = ''
+        if '_kwargs' not in self.__dict__:
+            remind = '(Did you forget to call super().__init__(**kwargs)?)'
+
+        elif key in self._kwargs:
             return self._kwargs[key]
-        raise AttributeError('{name!r} object has no attribute {key!r}'
-                             .format(name=self.__class__.__name__, key=key))
+
+        raise AttributeError('{name!r} object has no attribute {key!r} {remind}'
+                             .format(name=self.__class__.__name__, key=key, remind=remind).strip())
 
 if __name__ == '__main__':
     import doctest
