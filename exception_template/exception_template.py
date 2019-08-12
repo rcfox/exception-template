@@ -26,9 +26,9 @@ class ExceptionTemplate(Exception):
         Exception arguments are accepted as kwargs, but a check is performed to ensure that
         all format string parameters are passed in, and no extras are given.
         """
-        super().__init__()
         self._kwargs = kwargs
         self._error_check()
+        super().__init__(str(self))
 
     def _error_check(self) -> None:
         required = set(arg for _, arg, _, _ in self.formatter.parse(self.message) if arg)
