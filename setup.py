@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setuptools.setup(
     name='exception-template',
-    version='0.0.1',
+    version='1.0.0',
     description='Create exception classes from message templates.',
     long_description=long_description,
     url='https://github.com/rcfox/exception-template',
